@@ -33,7 +33,7 @@ def birthdays(book):
 @input_error
 def change_contact(book: AddressBook, args):
     
-    name, new_phone = args
+    name,old_phone, new_phone = args
     record = book.find(name)
     
     if not record:
@@ -42,13 +42,11 @@ def change_contact(book: AddressBook, args):
     if not Phone.number_check(new_phone):
         raise ValueError("Invalid symbols in number")
 
-    if record.phones:
-        old_phone = record.phones[0].value
+    if any(p.value == old_phone for p in record.phones):
         record.edit_phone(old_phone, new_phone)
+        return "Contact updated"
     else:
-        record.add_phone(new_phone)
-    
-    return "Contact updated"
+        raise ValueError("Phone not in User phones")
 
 
 @input_error
