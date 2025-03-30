@@ -21,7 +21,7 @@ def show_birthday(args, book):
     if record is None:
         return "Contact not found."
     if record.birthday:
-        return f"{name}  birthday: {record.birthday.value.strftime('%d.%m.%Y')}"
+        return f"{name}  birthday: {record.birthday.value}"
     return "Birthday not set."
 
 
@@ -32,8 +32,6 @@ def birthdays(book):
 
 @input_error
 def change_contact(book: AddressBook, args):
-    if len(args) != 2:
-        raise IndexError("Invalid number of arguments")
     
     name, new_phone = args
     record = book.find(name)
@@ -88,8 +86,6 @@ def add_birthday(args, book):
 
 
 def parse_input(user_input):
-    if (len(user_input)) < 1:
-        raise IndexError("invalid number of arguments")
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
     return cmd, *args
