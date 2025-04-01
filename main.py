@@ -8,9 +8,6 @@ def main():
     
     while True:
         user_input = input("Enter a command: ").strip().lower()
-        if not user_input:
-            print("Please write a command")
-            continue
         command, *args = parse_input(user_input)
         
         
